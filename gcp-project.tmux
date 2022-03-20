@@ -7,8 +7,12 @@ source "${CURRENT_DIR}/scripts/utils.sh"
 
 function main(){
     project="$(get_gcp_project)"
-    option_value="$(get_tmux_option status_right)"
-    tmux set-option -gq "status-right" "GCP:${project}"
+    if [ $? -ne 0 ]; then
+        return
+    fi
+
+    option_value="$(get_tmux_option status-right)"
+    tmux set-option -gq "status-right" "GCP:${project} ${option_value}"
 }
 
 main
